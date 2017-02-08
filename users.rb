@@ -5,8 +5,12 @@ require_relative 'facebook.rb'
 class Users < FaceBook
   attr_accessor :id, :fname, :lname
 
-  def self.all(table)
+  def self.all
     super('users')
+  end
+
+  def self.find_by_id(id)
+    super('users', id)
   end
 
   def self.find_by_name(fname, lname)

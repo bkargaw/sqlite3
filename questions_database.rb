@@ -19,8 +19,8 @@ class Questions < FaceBook
     super('questions')
   end
 
-  def self.find_by_id
-    super('questions', @id)
+  def self.find_by_id(id)
+    super('questions', id)
   end
 
   def self.find_by_author_id(author_id)
@@ -69,13 +69,6 @@ class Questions < FaceBook
     QuestionLike.num_likes_for_question_id(@id)
   end
 
-  def save
-    if @id.nil?
-      create
-    else
-      update
-    end
-  end
 
   def create
     QuestionsDBConnection.instance.execute(<<-SQL, @title, @body, @user_id)

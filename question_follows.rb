@@ -4,6 +4,13 @@ require_relative 'facebook.rb'
 class QuestionFollows < FaceBook
   attr_accessor :id, :user_id, :questions_id
 
+  def self.all
+    super('question_follows')
+  end
+
+  def self.find_by_id(id)
+    super('question_follows', id)
+  end
 
   def self.followers_for_question_id(question_id)
     users_follow = QuestionsDBConnection.instance.execute(<<-SQL, question_id)

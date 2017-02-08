@@ -4,6 +4,14 @@ require_relative 'facebook.rb'
 class QuestionLike < FaceBook
   attr_accessor :id, :user_id, :questions_id
 
+  def self.all
+    super('question_like')
+  end
+
+  def self.find_by_id(id)
+    super('question_like', id)
+  end
+
   def self.likers_for_question_id(question_id)
     question_like = QuestionsDBConnection.instance.execute(<<-SQL, question_id)
       SELECT

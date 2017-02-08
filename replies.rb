@@ -5,6 +5,14 @@ require_relative 'facebook.rb'
 class Replies < FaceBook
     attr_accessor :id, :replies_id, :user_id, :body, :questions_id
 
+    def self.all
+      super('replies')
+    end
+
+    def self.find_by_id(id)
+      super('replies', id)
+    end
+
   def self.find_by_user_id(id)
     replies = QuestionsDBConnection.instance.execute(<<-SQL, id)
       SELECT
