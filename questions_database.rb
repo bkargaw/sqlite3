@@ -1,4 +1,5 @@
 require_relative 'facebook.rb'
+require 'singleton'
 
 class QuestionsDBConnection < SQLite3::Database
   include Singleton
@@ -14,8 +15,12 @@ end
 class Questions < FaceBook
   attr_accessor :id, :title, :user_id, :body
 
-  def self.all(table)
+  def self.all
     super('questions')
+  end
+
+  def self.find_by_id
+    super('questions', @id)
   end
 
   def self.find_by_author_id(author_id)
